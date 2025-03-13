@@ -1,0 +1,10 @@
+step 1 :-  required mongoose
+
+
+step 2:- make connection to db 
+
+
+step 3 :- make schema 
+
+
+step 4:-  make model
