@@ -45,14 +45,8 @@ const Texts = mongoose.model("Texts", TextSchema)
 
 
 app.post("/api/share", async (req, res) => {
-  // console.log("Received data1st:", req.body); // ✅ Log the entire request body
 
-  // Check if `text` and `code` exist
-  // if (!req.body.text || !req.body.code) {
-  //   return res.status(400).json({ error: "Text and Code are required" });
-  // }
 
-  // Access `text` and `code` safely
   const { text, code } = req.body;
   console.log(`Text: ${text}, Code: ${code}`);
 
@@ -67,25 +61,42 @@ app.post("/api/share", async (req, res) => {
 
 });
 
+// app.post("/find-data", async (req, res) => {
+//     try {
+//         const requestData = req.body;
 
-// app.post("/api/share", (req, res) => {
-//   // Get the data from the request
-//   console.log("Received data:", req.body); 
+//         const result = await DataModel.findOne(requestData);
 
-//   // // console.log the data
-//   // console.log("Your text is:", text || "No text received");
-//   // console.log("Your code is:", code || "No code received");
-
-
-//   // // Define the response message
-//   // const message = "Data received successfully";
-
-//   // // Log the response message before sending
-//   // console.log(message);
-
-//   // // Send the response
-//   // res.send(message);
+//         if (result) {
+//             res.json({ success: true, data: result });
+//         } else {
+//             res.json({ success: false, message: "No matching data found" });
+//         }
+//     } catch (error) {
+//         console.error(error);
+//         res.status(500).json({ success: false, error: error.message });
+//     }
 // });
+app.post("/api/getText", async(req ,res)=>{
+  try{
+    const notFound = "Text not found!";
+    const getCode = req.body;
+    const getText = await Texts.findOne(getCode)
+    if (getText) {
+      res.json({succes: true , data: getText})
+    } else{
+      res.json({success: false , data: notFound })
+    }
+  } catch (error){
+    console.log(error);
+  }
+  
+  
+
+  
+})
+
+
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
