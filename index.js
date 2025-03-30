@@ -96,7 +96,6 @@ app.post("/api/getText", async (req, res) => {
 cron.schedule("*/10 * * * *", async () => {
   try {
     await Texts.deleteMany({}); // Deletes all documents in the collection
-    console.log("All data deleted from MongoDB at:", new Date());
   } catch (error) {
     console.error("Error deleting data:", error);
   }
