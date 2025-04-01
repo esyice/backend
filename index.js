@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const app = express();
 const cron = require("node-cron");
 const port = process.env.PORT;
-const url = process.env.URL:
+const url = process.env.URL;
 
 // Middleware to parse JSON request bodies
 app.use(express.json());
