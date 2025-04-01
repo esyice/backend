@@ -12,7 +12,7 @@ app.use(express.json());
 
 // connectiong db
 mongoose
-  .connect(${url})
+  .connect(url)
   .then(() => console.log("connected"))
   .catch((error) => console.log("error:", error));
 // connectiong db
