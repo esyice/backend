@@ -17,14 +17,6 @@ mongoose
   .catch((error) => console.log("error:", error));
 // connectiong db
 
-const client = new MongoClient(uri, {
-  serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true,
-  }
-});
-
 // making schemaa
 
 const TextSchema = new mongoose.Schema(
