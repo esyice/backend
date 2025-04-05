@@ -6,9 +6,17 @@ const app = express();
 const cron = require("node-cron");
 const port = process.env.PORT;
 const url = process.env.URL;
+const cors = require("cors")
 
 // Middleware to parse JSON request bodies
 app.use(express.json());
+
+// Allow CORS from your frontend
+app.use(cors({
+  origin: 'https://text.ezice.online', // ✅ allow your frontend
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true
+}));
 
 // connectiong db
 mongoose
