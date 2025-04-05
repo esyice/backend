@@ -25,14 +25,6 @@ mongoose
   .catch((error) => console.log("error:", error));
 // connectiong db
 
-const client = new MongoClient(uri, {
-  serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true,
-  }
-});
-
 // making schemaa
 
 const TextSchema = new mongoose.Schema(
@@ -57,43 +49,43 @@ const Texts = mongoose.model("Texts", TextSchema);
 
 // making model
 
-app.post("/api/share", async (req, res) => {
-  const { text, code } = req.body;
-  
-  // Log the request body for debugging
-  console.log("Received body:", req.body);
-
-  // Check if `text` and `code` are missing
-  if (!text || !code) {
-    return res.status(400).json({ error: "Both 'text' and 'code' are required." });
-  }
-
-  try {
-    // Save the data to MongoDB
-    await Texts.create({ text, code });
-
-    console.log("Data created successfully");
-    res.status(201).json({ message: "Data saved successfully" });
-  } catch (error) {
-    console.error("Error saving data:", error);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-});
-
-
 // app.post("/api/share", async (req, res) => {
 //   const { text, code } = req.body;
-//   console.log(`Text: ${text}, Code: ${code}`);
+  
+//   // Log the request body for debugging
+//   console.log("Received body:", req.body);
 
-//   res.status(200).json({ message: "Data received successfully" });
+//   // Check if `text` and `code` are missing
+//   if (!text || !code) {
+//     return res.status(400).json({ error: "Both 'text' and 'code' are required." });
+//   }
 
-//   await Texts.create({
-//     text: req.body.text,
-//     code: req.body.code,
-//   });
+//   try {
+//     // Save the data to MongoDB
+//     await Texts.create({ text, code });
 
-//   console.log("Data created successfully");
+//     console.log("Data created successfully");
+//     res.status(201).json({ message: "Data saved successfully" });
+//   } catch (error) {
+//     console.error("Error saving data:", error);
+//     res.status(500).json({ error: "Internal Server Error" });
+//   }
 // });
+
+
+app.post("/api/share", async (req, res) => {
+  const { text, code } = req.body;
+  console.log(`Text: ${text}, Code: ${code}`);
+
+
+  await Texts.create({
+    text: req.body.text,
+    code: req.body.code,
+  });
+
+  res.status(200).json({ message: "Data received successfully" });
+  console.log("Data created successfully");
+});
 
 // app.post("/find-data", async (req, res) => {
 //     try {
