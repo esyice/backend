@@ -126,13 +126,13 @@ app.post("/api/getText", async (req, res) => {
 // └────────── minute............[0 - 59]
 
 // Scheduled task to delete all data every 10 minutes
-cron.schedule("*/10 * * * *", async () => {
-  try {
-    await Texts.deleteMany({}); // Deletes all documents in the collection
-  } catch (error) {
-    console.error("Error deleting data:", error);
-  }
-});
+//cron.schedule("*/10 * * * *", async () => {
+ // try {
+   // await Texts.deleteMany({}); // Deletes all documents in the collection
+//  } catch (error) {
+  //  console.error("Error deleting data:", error);
+//  }
+//});
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
