@@ -6,9 +6,17 @@ const app = express();
 const cron = require("node-cron");
 const port = process.env.PORT;
 const url = process.env.URL;
+const cors = require("cors")
 
 // Middleware to parse JSON request bodies
 app.use(express.json());
+
+// Allow CORS from your frontend
+app.use(cors({
+  origin: 'https://text.ezice.online', // ✅ allow your frontend
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true
+}));
 
 // connectiong db
 mongoose
@@ -118,13 +126,13 @@ app.post("/api/getText", async (req, res) => {
 // └────────── minute............[0 - 59]
 
 // Scheduled task to delete all data every 10 minutes
-cron.schedule("*/10 * * * *", async () => {
-  try {
-    await Texts.deleteMany({}); // Deletes all documents in the collection
-  } catch (error) {
-    console.error("Error deleting data:", error);
-  }
-});
+//cron.schedule("*/10 * * * *", async () => {
+ // try {
+   // await Texts.deleteMany({}); // Deletes all documents in the collection
+//  } catch (error) {
+  //  console.error("Error deleting data:", error);
+//  }
+//});
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
